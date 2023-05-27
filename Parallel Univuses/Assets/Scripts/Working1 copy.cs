@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Working2 : MonoBehaviour
+public class Working1copy : MonoBehaviour
 {
     public TextAsset inkJSON;
     private Story story;

@@ -1,15 +1,18 @@
- using Ink.Runtime;
+using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Working1 : MonoBehaviour
 {
-    public TextAsset inkJSON;
+    [SerializeField]
+    private TextAsset inkJSON;
     private Story story;
 
-    public UnityEngine.UI.Text textPrefab;
-    public UnityEngine.UI.Button buttonPrefab;
+    [SerializeField]
+    private UnityEngine.UI.Text textPrefab;
+    [SerializeField]
+    private UnityEngine.UI.Button buttonPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -23,25 +26,28 @@ public class Working1 : MonoBehaviour
     {
         eraseUI();
 
-         UnityEngine.UI.Text storyText = Instantiate(textPrefab) as UnityEngine.UI.Text;
+         UnityEngine.UI.Text storyDialogue = Instantiate(textPrefab) as UnityEngine.UI.Text;
 
-         string text = loadStoryChunk();
+         string loadedText = loadStoryChunk();
 
          List<string> tags = story.currentTags;
 
          if (tags.Count > 0)
          {
-            text = "<b>" + tags[0] + "</b> - " + text;
+            loadedText = "<b>" + tags[0] + "</b> - " + loadedText;
          }
 
-        storyText.text = text;
-        storyText.transform.SetParent(this.transform, false); 
+        storyDialogue.text = loadedText;
+        storyDialogue.transform.SetParent(this.transform, false); 
 
-        foreach (Choice choice in story.currentChoices)
+        for (int i = 0; i < story.currentChoices.Count; i++)
         {
             UnityEngine.UI.Button choiceButton = Instantiate(buttonPrefab) as UnityEngine.UI.Button;
-            UnityEngine.UI.Text choiceText = buttonPrefab.GetComponentInChildren<UnityEngine.UI.Text>();
-            choiceText.text = choice.text;
+            UnityEngine.UI.Text choiceButtonText = choiceButton.GetComponentInChildren<UnityEngine.UI.Text>();
+            
+            Choice choice = story.currentChoices[i];
+            choiceButtonText.text = choice.text;
+
             choiceButton.transform.SetParent(this.transform, false);
 
             choiceButton.onClick.AddListener(delegate
@@ -51,6 +57,9 @@ public class Working1 : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Remove all game objects to prepare for next story chunk to be updated
+    /// </summary>
     void eraseUI()
     {
         for(int i = 0; i < this.transform.childCount; i++)
@@ -65,20 +74,24 @@ public class Working1 : MonoBehaviour
         refreshUI();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Used to run story until a set of choices has to be made
+    /// </summary>
+    /// <returns></returns>
     string loadStoryChunk()
     {
-        string text = "";
+        string textChunk = "";
         
         if (story.canContinue)
         {
-            text = story.ContinueMaximally();
+            textChunk = story.ContinueMaximally();
         }
-        return text;
+        return textChunk;
     }
+
+    // // Update is called once per frame
+    // void Update()
+    // {
+        
+    // }
 }
