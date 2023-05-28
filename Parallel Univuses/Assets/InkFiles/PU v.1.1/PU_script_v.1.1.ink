@@ -28,7 +28,6 @@ If so, you've come to the right place.
 
 
     = introduction(name)
-    #colour blue
     ~ player_name = name
     Hello {player_name}, I'm GuPTa. It's great to finally meet you. It's been a long time since I've met a human like you. #GuPTa
     -> probe_further
@@ -37,7 +36,7 @@ If so, you've come to the right place.
     Tell me, what do you plan to study?
         * {player_name == "Aaron"} FASS[?]! -> praise
         * {player_name == "Beth"} Computer Science[?]! -> praise
-        * {player_name == "Caelan"} [I love the arts!] Yes! The Arts! -> praise
+        * {player_name == "Caelan"} [Law!] Yes! Law! -> praise
         * (Idk) I'm really not sure yet. -> console
         
     = praise

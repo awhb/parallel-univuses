@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Working1 : MonoBehaviour
+public class Working1copy : MonoBehaviour
 {
     [SerializeField]
     private TextAsset inkJSON;
