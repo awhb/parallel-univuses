@@ -67,8 +67,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 722740db418394488853ad5e41b221fc, type: 3}
-    m_FontSize: 36
+    m_Font: {fileID: 12800000, guid: 1062c88b1c07449e7b6009db145f4687, type: 3}
+    m_FontSize: 33
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

@@ -57,6 +57,7 @@ public class Working1 : MonoBehaviour
             {
                 chooseStoryChoice(choice);
             });
+
         }
     }
 
