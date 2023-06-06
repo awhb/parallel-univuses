@@ -6,7 +6,7 @@ using UnityEngine;
 public class Working1 : MonoBehaviour
 {
     [Header("Params")]
-    [SerializeField] private float textSpeed = 0.02f;
+    [SerializeField] private float textSpeed = 0.04f;
 
     [Header("Ink References")]
     [SerializeField] private TextAsset inkJSON;
@@ -42,6 +42,7 @@ public class Working1 : MonoBehaviour
             loadedText = "<b>" + tags[0] + "</b> - " + loadedText;
          }
 
+        // makes canvas the parent of the story dialogue text
         storyDialogue.transform.SetParent(this.transform, false); 
         StartCoroutine(DisplayLine(storyDialogue, loadedText, showChoicesAfter));
 
@@ -66,6 +67,14 @@ public class Working1 : MonoBehaviour
 
         // display each letter one at a time
         foreach (char letter in line.ToCharArray()) {
+            // if submit button is pressed, finish up displaying line right away
+            /** 
+                TBD: alternative check if player has set setting to skip typing effect
+            */
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                storyDialogue.text = line;
+                break;
+            }
             storyDialogue.text += letter;
             yield return new WaitForSeconds(textSpeed);
         }
