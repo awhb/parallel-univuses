@@ -308,10 +308,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd743441b8ba441df9da93974c17440e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJSON: {fileID: 4900000, guid: 6f7b59fd88b6648fa9e0bc2de6d309f3, type: 3}
+  inkJSON: {fileID: 4900000, guid: 5817d27c2316d4894997d4f3577ef9da, type: 3}
   textPrefab: {fileID: 2291176650330657273, guid: 306afa63d3602417b92d43ca9dfe3e94, type: 3}
   buttonPrefab: {fileID: 4905929437358837314, guid: 5e26048c7f74f40f490dae8f6f8c5804, type: 3}
-  canvas: {fileID: 1455060595}
 --- !u!114 &1455060592
 MonoBehaviour:
   m_ObjectHideFlags: 0
