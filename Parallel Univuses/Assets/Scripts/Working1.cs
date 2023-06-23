@@ -5,14 +5,16 @@ using UnityEngine;
 
 public class Working1 : MonoBehaviour
 {
-    [SerializeField]
-    private TextAsset inkJSON;
-    private Story story;
+    [Header("Params")]
+    [SerializeField] private float textSpeed = 0.04f;
 
-    [SerializeField]
-    private UnityEngine.UI.Text textPrefab;
-    [SerializeField]
-    private UnityEngine.UI.Button buttonPrefab;
+    [Header("Ink References")]
+    [SerializeField] private TextAsset inkJSON;
+    [SerializeField] private Story story;
+
+    [Header("UI References")]
+    [SerializeField] private UnityEngine.UI.Text textPrefab;
+    [SerializeField] private UnityEngine.UI.Button buttonPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public class Working1 : MonoBehaviour
     /// <summary>
     /// Runs the resetting of new narration and choice text after a previous choice is made. 
     /// </summary>
-    void refreshUI()
+    private void refreshUI()
     {
         eraseUI();
 
@@ -40,11 +42,49 @@ public class Working1 : MonoBehaviour
             loadedText = "<b>" + tags[0] + "</b> - " + loadedText;
          }
 
-        storyDialogue.text = loadedText;
+        // makes canvas the parent of the story dialogue text
         storyDialogue.transform.SetParent(this.transform, false); 
+        StartCoroutine(DisplayLine(storyDialogue, loadedText, showChoicesAfter));
 
-        for (int i = 0; i < story.currentChoices.Count; i++)
+    }
+
+    /// <summary>
+    /// Remove all game objects to prepare for next story chunk to be updated.
+    /// </summary>
+    private void eraseUI()
+    {
+        for(int i = 0; i < this.transform.childCount; i++)
         {
+            Destroy(this.transform.GetChild(i).gameObject);
+        }
+    }
+
+    //// <summary>
+    /// Display each letter in the line in story dialogue one at a time.
+    private IEnumerator DisplayLine(UnityEngine.UI.Text storyDialogue, string line, System.Action showChoicesAfter) {
+        // empty the dialogue text
+        storyDialogue.text = "";
+
+        // display each letter one at a time
+        foreach (char letter in line.ToCharArray()) {
+            // if submit button is pressed, finish up displaying line right away
+            /** 
+                TBD: alternative check if player has set setting to skip typing effect
+            */
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                storyDialogue.text = line;
+                break;
+            }
+            storyDialogue.text += letter;
+            yield return new WaitForSeconds(textSpeed);
+        }
+
+        // display choices after the line is fully displayed
+        showChoicesAfter();
+    }
+
+    private void showChoicesAfter() {
+        for (int i = 0; i < story.currentChoices.Count; i++) {
             UnityEngine.UI.Button choiceButton = Instantiate(buttonPrefab) as UnityEngine.UI.Button;
             UnityEngine.UI.Text choiceButtonText = choiceButton.GetComponentInChildren<UnityEngine.UI.Text>();
             
@@ -62,21 +102,10 @@ public class Working1 : MonoBehaviour
     }
 
     /// <summary>
-    /// Remove all game objects to prepare for next story chunk to be updated.
-    /// </summary>
-    void eraseUI()
-    {
-        for(int i = 0; i < this.transform.childCount; i++)
-        {
-            Destroy(this.transform.GetChild(i).gameObject);
-        }
-    }
-
-    /// <summary>
     /// Trigger to move to the next set of choices.
     /// </summary>
     /// <param name="choice">The type that a choice is represented by</param>
-    void chooseStoryChoice(Choice choice)
+    private void chooseStoryChoice(Choice choice)
     {
         story.ChooseChoiceIndex(choice.index);
         refreshUI();
@@ -88,7 +117,7 @@ public class Working1 : MonoBehaviour
     /// <returns>
     /// A string representing the fully loaded story read within the JSON file until a set of choices has to be made.
     /// </returns>
-    string loadStoryChunk()
+    private string loadStoryChunk()
     {
         string textChunk = "";
         
