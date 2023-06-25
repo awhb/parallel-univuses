@@ -2,8 +2,9 @@ using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Working1 : MonoBehaviour
+public class StoryManager : MonoBehaviour
 {
     [Header("Params")]
     [SerializeField] private float textSpeed = 0.04f;
@@ -18,8 +19,13 @@ public class Working1 : MonoBehaviour
     [SerializeField] private AudioSource clicksoundeffect;
     // [SerializeField] private Sounds sounds;
 
+    [Header("Audio References")]
     public AudioClip[] audioClipArray;
     [SerializeField] private AudioSource flexible;
+
+
+    // Save load functionality
+    private const string SAVE_STORY_STATE = "savedStoryState";
 
     
     // Start is called before the first frame update
@@ -27,6 +33,8 @@ public class Working1 : MonoBehaviour
     {
         // for audio files
         flexible = gameObject.GetComponent<AudioSource> ();
+
+        // TBD: Set volume from playerpreferences
         flexible.volume = 0.5f;
 
         story = new Story(inkJSON.text);
@@ -154,9 +162,37 @@ public class Working1 : MonoBehaviour
         return textChunk;
     }
 
-    // // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
+
+    /// <summary>
+    /// Save the story state.
+    /// </summary>
+    public void SaveStoryState()
+    {
+        if (story != null)
+        {
+            PlayerPrefs.SetString(SAVE_STORY_STATE, story.state.ToJson());
+            Debug.Log("Saved story state");
+        }
+    }
+
+
+    /// <summary>
+    /// If we have saved data, load it.
+    /// </summary>
+    public void LoadStoryState()
+    {
+        if (PlayerPrefs.HasKey(SAVE_STORY_STATE))
+        {
+            story.state.LoadJson(PlayerPrefs.GetString(SAVE_STORY_STATE));
+            Debug.Log("Loaded story state");
+        }
+    }
+
+    /// <summary>
+    /// Return to the main menu.
+    /// </summary>
+    public void ReturnMainMenu() {
+        SaveStoryState();
+        SceneManager.LoadScene(0);
+    }
 }
