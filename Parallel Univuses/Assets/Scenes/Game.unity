@@ -341,7 +341,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 466598814}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1127657936}
+        m_TargetAssemblyTypeName: StoryManager, Assembly-CSharp
+        m_MethodName: ReturnMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &466598814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,8 +512,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960, y: -194.8053}
-  m_SizeDelta: {x: 1920, y: 389.6095}
+  m_AnchoredPosition: {x: 960, y: -195}
+  m_SizeDelta: {x: 1920, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &602737453
 GameObject:
@@ -854,10 +866,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textSpeed: 0.04
-  inkJSON: {fileID: 4900000, guid: 8946e8769123545cc8eeb4a2ab4dec70, type: 3}
+  inkJSON: {fileID: 4900000, guid: 6f7b59fd88b6648fa9e0bc2de6d309f3, type: 3}
   textPrefab: {fileID: 2291176650330657273, guid: 306afa63d3602417b92d43ca9dfe3e94, type: 3}
   buttonPrefab: {fileID: 4905929437358837314, guid: 5e26048c7f74f40f490dae8f6f8c5804, type: 3}
-  clicksoundeffect: {fileID: 0}
+  clicksoundeffect: {fileID: 1127657935}
   audioClipArray:
   - {fileID: 8300000, guid: 94d79fa5a2cb8429bbc09581bb62afc4, type: 3}
   - {fileID: 8300000, guid: b4631f228a287453893395b36f2bc39b, type: 3}
@@ -1105,9 +1117,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayGame
+      - m_Target: {fileID: 1127657936}
+        m_TargetAssemblyTypeName: StoryManager, Assembly-CSharp
+        m_MethodName: LoadStoryState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1343,7 +1355,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1476,9 +1488,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayGame
+      - m_Target: {fileID: 1127657936}
+        m_TargetAssemblyTypeName: StoryManager, Assembly-CSharp
+        m_MethodName: SaveStoryState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

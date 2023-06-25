@@ -185,6 +185,7 @@ public class StoryManager : MonoBehaviour
         {
             story.state.LoadJson(PlayerPrefs.GetString(SAVE_STORY_STATE));
             Debug.Log("Loaded story state");
+            refreshUI();
         }
     }
 
