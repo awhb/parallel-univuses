@@ -75,7 +75,7 @@ public class StoryManager : MonoBehaviour
 
          // }
 
-        // makes canvas the parent of the story dialogue text
+        // makes in-game region the parent of the story dialogue text
         storyDialogue.transform.SetParent(this.transform, false); 
         StartCoroutine(DisplayLine(storyDialogue, loadedText, showChoicesAfter));
 
