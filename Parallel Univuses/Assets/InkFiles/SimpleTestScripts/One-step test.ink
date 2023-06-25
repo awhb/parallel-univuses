@@ -1,11 +1,11 @@
-What is your <color=grey>name</color>? <i>Young</i> one? #Higher Being
+What is your <color=grey>name</color>? <i>Young</i> one?
 
 * [Andy] -> end
 * [Bobby] -> end
 * [Charlie] -> end
 
 == end ==
-Aight <i>coolbeans</i> #Higher Being
+Aight <i>coolbeans</i>
 -> END
 
 

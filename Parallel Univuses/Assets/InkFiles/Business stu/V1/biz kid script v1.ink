@@ -8,8 +8,9 @@ Wake up?
 *[No] -> Skip_orientation_entirely
 
 == Skip_orientation_entirely
-You wake up three hours later, at 11am. Staring at the walls of your humble bedroom. You glance at the packed bag in the corner, but your mind wanders as the sunlight reminds you that you're feeling a little hungry. You check your phone to see a message from your orientation group leader:
-"Hi! We're meeting a the foyer, will you be reaching soon?"
+You wake up three hours later, at <i>11am</i>.
+// Staring at the walls of your humble bedroom. You glance at the packed bag in the corner, but your mind wanders as the sunlight reminds you that you're feeling a little hungry. You check your phone to see a message from your orientation group leader:
+"Hi! We're meeting a the foyer, will you be reaching soon?" #wtf
 * [Ignore him] -> Screw_ori
 * [Reply and say you'll be there after lunch] -> Attend_ori
 

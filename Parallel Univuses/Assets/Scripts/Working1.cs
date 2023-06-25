@@ -15,12 +15,21 @@ public class Working1 : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private UnityEngine.UI.Text textPrefab;
     [SerializeField] private UnityEngine.UI.Button buttonPrefab;
+    [SerializeField] private AudioSource clicksoundeffect;
+    // [SerializeField] private Sounds sounds;
+
+    public AudioClip[] audioClipArray;
+    [SerializeField] private AudioSource flexible;
+
     
     // Start is called before the first frame update
     void Start()
     {
-        story = new Story(inkJSON.text);
+        // for audio files
+        flexible = gameObject.GetComponent<AudioSource> ();
+        flexible.volume = 0.5f;
 
+        story = new Story(inkJSON.text);
         refreshUI();
     }
 
@@ -37,10 +46,26 @@ public class Working1 : MonoBehaviour
 
          List<string> tags = story.currentTags;
 
-         if (tags.Count > 0)
-         {
-            loadedText = "<b>" + tags[0] + "</b> - " + loadedText;
-         }
+        //  if (tags.Count > 0)
+        //  {
+        //     loadedText = "<b>" + tags[0] + "</b> - " + loadedText;
+        //  }
+
+        // using tags in Ink to search for the index amongst an array of AudioClips. Play the clip associated with the number being tagged in Ink. 
+        if (tags.Count > 0 && int.TryParse(tags[0], out int num) && tags.Count < audioClipArray.Length)
+        {
+            // Conversion successful, do something with num.
+        flexible.clip = audioClipArray[num - 1];
+        flexible.PlayOneShot (flexible.clip);
+        flexible.Play();
+        }
+        else
+        {
+            // Conversion failed, handle the error.
+            Debug.Log("The audio file you're looking for should be an integer or there are no tags");
+        }
+
+         // }
 
         // makes canvas the parent of the story dialogue text
         storyDialogue.transform.SetParent(this.transform, false); 
@@ -95,6 +120,7 @@ public class Working1 : MonoBehaviour
 
             choiceButton.onClick.AddListener(delegate
             {
+                clicksoundeffect.Play();
                 chooseStoryChoice(choice);
             });
 
