@@ -16,13 +16,16 @@ public class StoryManager : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private UnityEngine.UI.Text textPrefab;
     [SerializeField] private UnityEngine.UI.Button buttonPrefab;
-    [SerializeField] private AudioSource clicksoundeffect;
+
     // [SerializeField] private Sounds sounds;
 
-    [Header("Audio References")]
+    [Header("SFX References")]
+    [SerializeField] private AudioSource clicksoundeffect;
     public AudioClip[] audioClipArray;
     [SerializeField] private AudioSource flexible;
 
+    [Header("BGM References")]
+    [SerializeField] private AudioSource bgm;
 
     // Save load functionality
     private const string SAVE_STORY_STATE = "savedStoryState";
@@ -34,8 +37,27 @@ public class StoryManager : MonoBehaviour
         // for audio files
         flexible = gameObject.GetComponent<AudioSource> ();
 
-        // TBD: Set volume from playerpreferences
-        flexible.volume = 0.5f;
+        // for bgm settings
+        if (PlayerPrefs.HasKey(Options.BGM_STATE))
+        {
+            bgm.volume = PlayerPrefs.GetFloat(Options.BGM_STATE);
+        }
+        else {
+            bgm.volume = 0.5f;
+            PlayerPrefs.SetFloat(Options.BGM_STATE, 0.5f);
+        }
+
+        // for sfx settings
+        if (PlayerPrefs.HasKey(Options.SFX_STATE))
+        {
+            flexible.volume = PlayerPrefs.GetFloat(Options.SFX_STATE);
+            clicksoundeffect.volume = PlayerPrefs.GetFloat(Options.SFX_STATE);
+        }
+        else {
+            flexible.volume = 0.5f;
+            clicksoundeffect.volume = 0.5f;
+            PlayerPrefs.SetFloat(Options.SFX_STATE, 0.5f);
+        }
 
         story = new Story(inkJSON.text);
         refreshUI();
