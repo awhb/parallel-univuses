@@ -879,6 +879,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1ee1a3904e52845d39c69baef89c605f, type: 3}
   - {fileID: 8300000, guid: 9cb2e17e73afd446aa40e87d5a03d1d1, type: 3}
   flexible: {fileID: 0}
+  bgm: {fileID: 1244787973}
 --- !u!114 &1127657937
 MonoBehaviour:
   m_ObjectHideFlags: 0
