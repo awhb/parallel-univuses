@@ -30,6 +30,8 @@ public class StoryManager : MonoBehaviour
     // Save load functionality
     private const string SAVE_STORY_STATE = "savedStoryState";
 
+    // Text typing effect functionality
+    private bool skipTypingEffect = false;
     
     // Start is called before the first frame update
     void Start()
@@ -76,11 +78,6 @@ public class StoryManager : MonoBehaviour
 
          List<string> tags = story.currentTags;
 
-        //  if (tags.Count > 0)
-        //  {
-        //     loadedText = "<b>" + tags[0] + "</b> - " + loadedText;
-        //  }
-
         // using tags in Ink to search for the index amongst an array of AudioClips. Play the clip associated with the number being tagged in Ink. 
         if (tags.Count > 0 && int.TryParse(tags[0], out int num) && tags.Count < audioClipArray.Length)
         {
@@ -94,8 +91,6 @@ public class StoryManager : MonoBehaviour
             // Conversion failed, handle the error.
             Debug.Log("The audio file you're looking for should be an integer or there are no tags");
         }
-
-         // }
 
         // makes in-game region the parent of the story dialogue text
         storyDialogue.transform.SetParent(this.transform, false); 
@@ -126,13 +121,16 @@ public class StoryManager : MonoBehaviour
             /** 
                 TBD: alternative check if player has set setting to skip typing effect
             */
-            if (Input.GetKeyDown(KeyCode.Return)) {
-                storyDialogue.text = line;
-                break;
+            if (skipTypingEffect)
+            {
+            storyDialogue.text = line;
+            break;
             }
             storyDialogue.text += letter;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        skipTypingEffect = false;
 
         // display choices after the line is fully displayed
         showChoicesAfter();
@@ -217,5 +215,13 @@ public class StoryManager : MonoBehaviour
     public void ReturnMainMenu() {
         SaveStoryState();
         SceneManager.LoadScene(0);
+    }
+
+    private void Update()
+    {
+    if (Input.GetKeyDown(KeyCode.Return))
+    {
+        skipTypingEffect = true;
+    }
     }
 }
