@@ -62,6 +62,7 @@ public class StoryManager : MonoBehaviour
         }
 
         story = new Story(inkJSON.text);
+        story.ResetState();
         refreshUI();
     }
 
