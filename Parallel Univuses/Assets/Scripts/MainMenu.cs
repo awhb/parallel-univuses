@@ -10,6 +10,6 @@ public class MainMenu : MonoBehaviour
     /// Enter the game.
     /// </summary>
     public void PlayGame() {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Game");
     }
 }

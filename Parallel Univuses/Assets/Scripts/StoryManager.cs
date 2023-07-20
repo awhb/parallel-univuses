@@ -73,11 +73,15 @@ public class StoryManager : MonoBehaviour
     {
         eraseUI();
 
-         UnityEngine.UI.Text storyDialogue = Instantiate(textPrefab) as UnityEngine.UI.Text;
+        UnityEngine.UI.Text storyDialogue = Instantiate(textPrefab) as UnityEngine.UI.Text;
 
-         string loadedText = loadStoryChunk();
+        string loadedText = loadStoryChunk();
 
-         List<string> tags = story.currentTags;
+        // makes in-game region the parent of the story dialogue text
+        storyDialogue.transform.SetParent(this.transform, false); 
+        StartCoroutine(DisplayLine(storyDialogue, loadedText, showChoicesAfter));
+
+        List<string> tags = story.currentTags;
 
         // using tags in Ink to search for the index amongst an array of AudioClips. Play the clip associated with the number being tagged in Ink. 
         if (tags.Count > 0 && int.TryParse(tags[0], out int num) && tags.Count < audioClipArray.Length)
@@ -92,10 +96,6 @@ public class StoryManager : MonoBehaviour
             // Conversion failed, handle the error.
             Debug.Log("The audio file you're looking for should be an integer or there are no tags");
         }
-
-        // makes in-game region the parent of the story dialogue text
-        storyDialogue.transform.SetParent(this.transform, false); 
-        StartCoroutine(DisplayLine(storyDialogue, loadedText, showChoicesAfter));
 
     }
 
@@ -215,12 +215,12 @@ public class StoryManager : MonoBehaviour
     /// </summary>
     public void ReturnMainMenu() {
         SaveStoryState();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Main Menu");
     }
 
     private void Update()
     {
-    if (Input.GetKeyDown(KeyCode.Return))
+    if (Input.GetKeyDown(KeyCode.Tab))
     {
         skipTypingEffect = true;
     }
