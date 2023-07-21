@@ -1027,7 +1027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textSpeed: 0.04
-  inkJSON: {fileID: 4900000, guid: ce5980e0b084843e4971ba61610b70d9, type: 3}
+  inkJSON: {fileID: 4900000, guid: cc9a67d27ad794739b91f79098623731, type: 3}
   textPrefab: {fileID: 2291176650330657273, guid: 306afa63d3602417b92d43ca9dfe3e94, type: 3}
   buttonPrefab: {fileID: 4905929437358837314, guid: 5e26048c7f74f40f490dae8f6f8c5804, type: 3}
   clicksoundeffect: {fileID: 1127657935}
