@@ -2,6 +2,7 @@ using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class StoryManager : MonoBehaviour
@@ -77,10 +78,6 @@ public class StoryManager : MonoBehaviour
 
         string loadedText = loadStoryChunk();
 
-        // makes in-game region the parent of the story dialogue text
-        storyDialogue.transform.SetParent(this.transform, false); 
-        StartCoroutine(DisplayLine(storyDialogue, loadedText, showChoicesAfter));
-
         List<string> tags = story.currentTags;
 
         // using tags in Ink to search for the index amongst an array of AudioClips. Play the clip associated with the number being tagged in Ink. 
@@ -96,6 +93,10 @@ public class StoryManager : MonoBehaviour
             // Conversion failed, handle the error.
             Debug.Log("The audio file you're looking for should be an integer or there are no tags");
         }
+
+        // makes in-game region the parent of the story dialogue text
+        storyDialogue.transform.SetParent(this.transform, false); 
+        StartCoroutine(DisplayLine(storyDialogue, loadedText, showChoicesAfter));
 
     }
 
