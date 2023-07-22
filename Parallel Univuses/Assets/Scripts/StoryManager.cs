@@ -27,7 +27,6 @@ public class StoryManager : MonoBehaviour
     // [SerializeField] private Sounds sounds;
 
     [Header("SFX References")]
-    [SerializeField] private AudioSource clicksoundeffect;
     public AudioClip[] audioClipArray;
     [SerializeField] private AudioSource flexible;
 
@@ -60,19 +59,20 @@ public class StoryManager : MonoBehaviour
         if (PlayerPrefs.HasKey(Options.SFX_STATE))
         {
             flexible.volume = PlayerPrefs.GetFloat(Options.SFX_STATE);
-            clicksoundeffect.volume = PlayerPrefs.GetFloat(Options.SFX_STATE);
         }
         else {
             flexible.volume = 0.5f;
-            clicksoundeffect.volume = 0.5f;
             PlayerPrefs.SetFloat(Options.SFX_STATE, 0.5f);
         }
 
-        story = new Story(inkJSON.text);
-        story.ResetState();
-        refreshUI();
+        if (inkJSON != null)
+        {
+            story = new Story(inkJSON.text);
+            story.ResetState();
+            refreshUI();
+        }
 
-        UploadFile();
+        CheckFileQuantity();
     }
 
     /// <summary>
@@ -92,12 +92,15 @@ public class StoryManager : MonoBehaviour
         if (tags.Count > 0 && int.TryParse(tags[0], out int num) && tags.Count < audioClipArray.Length)
         {
             // Conversion successful, do something with num.
-        flexible.clip = audioClipArray[num - 1];
-        flexible.PlayOneShot (flexible.clip);
-        flexible.Play();
+            flexible.clip = audioClipArray[num - 1];
+            flexible.PlayOneShot(flexible.clip);
+            flexible.Play();
         }
         else
         {
+            flexible.clip = audioClipArray[0];
+            flexible.PlayOneShot(flexible.clip);
+            flexible.Play();
             // Conversion failed, handle the error.
             Debug.Log("The audio file you're looking for should be an integer or there are no tags");
         }
@@ -158,7 +161,6 @@ public class StoryManager : MonoBehaviour
 
             choiceButton.onClick.AddListener(delegate
             {
-                clicksoundeffect.Play();
                 chooseStoryChoice(choice);
             });
 
@@ -205,30 +207,45 @@ public class StoryManager : MonoBehaviour
         });
     }
 
+    public void CheckFileQuantity() {
+            // Get a list of the files that the current player has
+            LootLockerSDKManager.GetAllPlayerFiles((response) =>
+            {
+                if (response.success)
+                {
+                    if (response.items.Length == 0) {
+                        UploadFile();
+                    }
+                    else {
+                        Debug.Log("There is already a saved file.");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Error in finding number of files present and whether to initialise upload");
+                }
+            });
+    }
+
     /// <summary>
     /// Save the story state.
     /// </summary>
     public void SaveStoryState()
     {
-        // if (story != null)
-        // {
-        //     PlayerPrefs.SetString(SAVE_STORY_STATE, story.state.ToJson());
-        //     Debug.Log("Saved story state");
-        // }
+        if (story != null)
+        {
+            int fileID = PlayerPrefs.GetInt("PlayerSaveDataFileID");
+            byte[] fileByteArray = Encoding.UTF8.GetBytes(story.state.ToJson());
 
-
-    int fileID = PlayerPrefs.GetInt("PlayerSaveDataFileID");
-    byte[] fileByteArray = Encoding.UTF8.GetBytes(story.state.ToJson());
-
-    LootLockerSDKManager.UpdatePlayerFile(fileID, fileByteArray, (response) => {
-        if(response.success) {
-            Debug.Log("File was uploaded!");
+            LootLockerSDKManager.UpdatePlayerFile(fileID, fileByteArray, (response) => {
+                if(response.success) {
+                    Debug.Log("File was uploaded!");
+                }
+                else {
+                    Debug.Log("File was not uploaded:" + response.Error);
+                }
+            });
         }
-        else {
-            Debug.Log("File was not uploaded:" + response.Error);
-        }
-    });
-
     }
 
 
@@ -237,12 +254,6 @@ public class StoryManager : MonoBehaviour
     /// </summary>
     public void LoadStoryState()
     {
-        // if (PlayerPrefs.HasKey(SAVE_STORY_STATE))
-        // {
-        //     story.state.LoadJson(PlayerPrefs.GetString(SAVE_STORY_STATE));
-        //     Debug.Log("Loaded story state");
-        //     refreshUI();
-        // }
 
         int fileID = PlayerPrefs.GetInt("PlayerSaveDataFileID");
         LootLockerSDKManager.GetPlayerFile(fileID, (response) => {
@@ -250,8 +261,6 @@ public class StoryManager : MonoBehaviour
                 Debug.Log("Retrieved URL");
                 StartCoroutine(Download(response.url, (fileContent) => {
                     Debug.Log("File is downloaded");
-                    // Do something with the content
-                    // Debug.Log(fileContent);
                     story.state.LoadJson(fileContent);
                     refreshUI();
                 }));
@@ -264,18 +273,18 @@ public class StoryManager : MonoBehaviour
     }
 
     IEnumerator Download(string url, System.Action<string> fileContent) {
-    UnityWebRequest www = new UnityWebRequest(url);
-    www.downloadHandler = new DownloadHandlerBuffer();
-    yield return www.SendWebRequest();
+        UnityWebRequest www = new UnityWebRequest(url);
+        www.downloadHandler = new DownloadHandlerBuffer();
+        yield return www.SendWebRequest();
 
-    if (www.result != UnityWebRequest.Result.Success)
-    {
-        Debug.Log(www.error);
-    }
-    else
-    { 
-        fileContent(www.downloadHandler.text);
-    }
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.Log(www.error);
+        }
+        else
+        { 
+            fileContent(www.downloadHandler.text);
+        }
     }
 
     /// <summary>
