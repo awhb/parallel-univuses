@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using LootLocker.Requests;
+using System.Text.RegularExpressions;
 
 public class StoryManager : MonoBehaviour
 {
@@ -184,17 +186,39 @@ public class StoryManager : MonoBehaviour
         return textChunk;
     }
 
+    // string path = Application.persistentDataPath + "/" + fileNameWithFileType;
 
     /// <summary>
     /// Save the story state.
     /// </summary>
     public void SaveStoryState()
     {
-        if (story != null)
-        {
-            PlayerPrefs.SetString(SAVE_STORY_STATE, story.state.ToJson());
-            Debug.Log("Saved story state");
-        }
+        string size = story.state.ToJson().Length.ToString();
+        // if (story != null)
+        // {
+        //     PlayerPrefs.SetString(SAVE_STORY_STATE, story.state.ToJson());
+        //     Debug.Log("Saved story state");
+        // }
+
+        LootLockerSDKManager.UpdateOrCreateKeyValue(SAVE_STORY_STATE, size, (getPersistentStoragResponse) => {
+            if (getPersistentStoragResponse.success) {
+                Debug.Log("Successfully updated player storage");
+                }
+            else {
+                Debug.Log("Error updating player storage");
+            }
+        });
+
+        // LootLockerSDKManager.UploadPlayerFile("/path/to/file/save_game.zip", "save_game", response =>
+        // {
+        //     if (response.success) {
+        //         Debug.Log("Successfully uploaded player file, url: " + response.url);
+        //     } 
+        //     else {
+        //         Debug.Log("Error uploading player file");
+        //     }
+        //     });
+
     }
 
 
@@ -203,12 +227,32 @@ public class StoryManager : MonoBehaviour
     /// </summary>
     public void LoadStoryState()
     {
-        if (PlayerPrefs.HasKey(SAVE_STORY_STATE))
-        {
-            story.state.LoadJson(PlayerPrefs.GetString(SAVE_STORY_STATE));
-            Debug.Log("Loaded story state");
-            refreshUI();
-        }
+        // if (PlayerPrefs.HasKey(SAVE_STORY_STATE))
+        // {
+        //     story.state.LoadJson(PlayerPrefs.GetString(SAVE_STORY_STATE));
+        //     Debug.Log("Loaded story state");
+        //     refreshUI();
+        // }
+
+        LootLockerSDKManager.GetSingleKeyPersistentStorage(SAVE_STORY_STATE, (response) => {
+            if (response.success)
+            {
+                if (response.payload != null)
+                {
+                    Debug.Log("Successfully retrieved player storage with value: " + response.payload.value);
+                    story.state.LoadJson(response.payload.value);
+                    Debug.Log("Loaded story state");
+                    refreshUI();
+                } else
+                {
+                    Debug.Log("Item with key " + SAVE_STORY_STATE + " does not exist");
+                }
+            } else
+            {
+                Debug.Log("Error getting player storage");
+            }
+        });
+
     }
 
     /// <summary>
