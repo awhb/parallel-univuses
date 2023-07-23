@@ -1032,7 +1032,6 @@ MonoBehaviour:
   buttonPrefab: {fileID: 4905929437358837314, guid: 5e26048c7f74f40f490dae8f6f8c5804, type: 3}
   clicksoundeffect: {fileID: 1127657935}
   audioClipArray:
-  - {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
   - {fileID: 8300000, guid: 94d79fa5a2cb8429bbc09581bb62afc4, type: 3}
   - {fileID: 8300000, guid: b4631f228a287453893395b36f2bc39b, type: 3}
   - {fileID: 8300000, guid: 07556297a41a64a7bae21084f548b428, type: 3}
