@@ -13,9 +13,6 @@ using UnityEngine.Networking;
 
 public class StoryManager : MonoBehaviour
 {
-    [Header("Params")]
-    [SerializeField] private float textSpeed = 0.04f;
-
     [Header("Ink References")]
     [SerializeField] private TextAsset inkJSON;
     [SerializeField] private Story story;
@@ -37,6 +34,7 @@ public class StoryManager : MonoBehaviour
     private const string SAVE_STORY_STATE = "savedStoryState";
 
     // Text typing effect functionality
+    private float textSpeed = 20f;
     private bool skipTypingEffect = false;
     
     // Start is called before the first frame update
@@ -63,6 +61,16 @@ public class StoryManager : MonoBehaviour
         else {
             flexible.volume = 0.5f;
             PlayerPrefs.SetFloat(Options.SFX_STATE, 0.5f);
+        }
+
+        // for text speed settings
+        if (PlayerPrefs.HasKey(Options.TEXT_SPEED_STATE))
+        {
+            textSpeed = PlayerPrefs.GetFloat(Options.TEXT_SPEED_STATE);
+        }
+        else {
+            textSpeed = 20f;
+            PlayerPrefs.SetFloat(Options.TEXT_SPEED_STATE, 20f);
         }
 
         if (inkJSON != null)
@@ -130,7 +138,7 @@ public class StoryManager : MonoBehaviour
 
         // display each letter one at a time
         foreach (char letter in line.ToCharArray()) {
-            // if submit button is pressed, finish up displaying line right away
+            // if left tab button is pressed, finish up displaying line right away
             /** 
                 TBD: alternative check if player has set setting to skip typing effect
             */
@@ -140,7 +148,7 @@ public class StoryManager : MonoBehaviour
             break;
             }
             storyDialogue.text += letter;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSeconds(1f / textSpeed);
         }
 
         skipTypingEffect = false;

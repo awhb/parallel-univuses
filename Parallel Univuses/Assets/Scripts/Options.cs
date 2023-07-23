@@ -9,10 +9,12 @@ public class Options : MonoBehaviour
     [Header("Sliders")]
     [SerializeField] private Slider BGMSlider;
     [SerializeField] private Slider SFXSlider;
+    [SerializeField] private Slider TextSpeedSlider;
 
     // Volume functionality
     public const string BGM_STATE = "bgmState";
     public const string SFX_STATE = "sfxState";
+    public const string TEXT_SPEED_STATE = "textSpeedState";
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,17 @@ public class Options : MonoBehaviour
         {   
             SFXSlider.value = 0.5f;
             SetSFX();
+        }
+
+        // for text speed settings
+        if (PlayerPrefs.HasKey(TEXT_SPEED_STATE))
+        {
+            LoadTextSpeed();
+        }
+        else 
+        {   
+            TextSpeedSlider.value = 20f;
+            SetTextSpeed();
         }
     }
 
@@ -63,5 +76,17 @@ public class Options : MonoBehaviour
     {
         SFXSlider.value = PlayerPrefs.GetFloat(SFX_STATE);
         SetSFX();
+    }
+
+    public void SetTextSpeed()
+    {
+        float textSpeed = TextSpeedSlider.value;
+        PlayerPrefs.SetFloat(TEXT_SPEED_STATE, textSpeed);
+    }
+
+    public void LoadTextSpeed() 
+    {
+        TextSpeedSlider.value = PlayerPrefs.GetFloat(TEXT_SPEED_STATE);
+        SetTextSpeed();
     }
 }
