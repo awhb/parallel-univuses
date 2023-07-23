@@ -11,7 +11,7 @@ using System.Net;
 using System.IO;
 using UnityEngine.Networking;
 
-public class StoryManager : MonoBehaviour
+public class StoryManagerCopy23Jul : MonoBehaviour
 {
     [Header("Params")]
     [SerializeField] private float textSpeed = 0.04f;
@@ -232,7 +232,6 @@ public class StoryManager : MonoBehaviour
     /// </summary>
     public void SaveStoryState()
     {
-        if (story != null) {
             int fileID = PlayerPrefs.GetInt("PlayerSaveDataFileID");
             byte[] fileByteArray = Encoding.UTF8.GetBytes(story.state.ToJson());
 
@@ -244,7 +243,6 @@ public class StoryManager : MonoBehaviour
                     Debug.Log("File was not uploaded:" + response.Error);
                 }
             });
-        }
     }
 
 

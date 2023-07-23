@@ -1030,7 +1030,6 @@ MonoBehaviour:
   inkJSON: {fileID: 4900000, guid: cc9a67d27ad794739b91f79098623731, type: 3}
   textPrefab: {fileID: 2291176650330657273, guid: 306afa63d3602417b92d43ca9dfe3e94, type: 3}
   buttonPrefab: {fileID: 4905929437358837314, guid: 5e26048c7f74f40f490dae8f6f8c5804, type: 3}
-  clicksoundeffect: {fileID: 1127657935}
   audioClipArray:
   - {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
   - {fileID: 8300000, guid: 94d79fa5a2cb8429bbc09581bb62afc4, type: 3}
