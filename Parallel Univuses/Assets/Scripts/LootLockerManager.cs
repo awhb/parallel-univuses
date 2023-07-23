@@ -43,12 +43,33 @@ public class LootLockerManager : MonoBehaviour
         LootLockerSDKManager.WhiteLabelSignUp(email, password, (response) => {
 
             if (!response.success) {
-                Debug.Log("You have already created an account. Please check if you have verified your email");
-                messageText.text = "You have already created an account. Please check if you have verified your email";
+                Debug.Log("You have already created an account. We have re-sent a verification email");
+                ResendVerificationEmail();
+                messageText.text = "You have already created an account. We have re-sent a verification email";
                 return;
             }
             Debug.Log("user created successfully");
             messageText.text = "We're almost done! Please go to your email to verify your address";
+        });
+
+        LootLockerSDKManager.SetPlayerName(email, (response) =>
+        {
+            if (response.success)
+            {
+                Debug.Log("Successfully set player name as email");
+            } else
+            {
+                Debug.Log("Error setting player name as email. You have already created an account or someone else has taken your email.");
+            }
+        });
+    }
+
+    public void ResendVerificationEmail() {
+        string email = emailInput.text;
+        LootLockerSDKManager.WhiteLabelRequestVerification(email, (response) => {
+            if (response.success) {
+                messageText.text = "Verification email has been re-sent.";
+            }
         });
     }
 
@@ -94,15 +115,33 @@ public class LootLockerManager : MonoBehaviour
             return;
         }
 
-        LootLockerSDKManager.WhiteLabelRequestPassword(email, (response) => {
-            if (!response.success) {
-                Debug.Log("Error requesting password reset");
-                messageText.text = "Error requesting password reset";
+        LootLockerSDKManager.GetPlayerName((response) => {
+            if (response.success) {
+                Debug.Log("Successfully retrieved player name: " + response.name);
+
+                sendResetPasswordEmail();
+                
+            } else {
+                Debug.Log("This email does not exist on our records");
+                messageText.text = "This email does not exist on our records";
                 return;
             }
-            Debug.Log("Email to reset password successfully sent");
-            messageText.text = "Email to reset password successfully sent";
         });
+    }
+
+    private void sendResetPasswordEmail() {
+        string email = emailInput.text;
+        LootLockerSDKManager.WhiteLabelRequestPassword(email, (response) => {
+
+        if (!response.success) {
+            Debug.Log("Error requesting password reset");
+            messageText.text = "Error requesting password reset";
+            return;
+        }
+        Debug.Log("Email to reset password successfully sent");
+        messageText.text = "Email to reset password successfully sent";
+        });
+
     }
 
     /// <summary>
