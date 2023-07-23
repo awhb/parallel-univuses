@@ -37,7 +37,7 @@ public class Options : MonoBehaviour
         }
         else 
         {   
-            SFXSlider.value = 0.5f;
+            SFXSlider.value = 0.25f;
             SetSFX();
         }
 

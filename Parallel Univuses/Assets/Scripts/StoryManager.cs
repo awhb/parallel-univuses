@@ -59,8 +59,8 @@ public class StoryManager : MonoBehaviour
             flexible.volume = PlayerPrefs.GetFloat(Options.SFX_STATE);
         }
         else {
-            flexible.volume = 0.5f;
-            PlayerPrefs.SetFloat(Options.SFX_STATE, 0.5f);
+            flexible.volume = 0.25f;
+            PlayerPrefs.SetFloat(Options.SFX_STATE, 0.25f);
         }
 
         // for text speed settings
