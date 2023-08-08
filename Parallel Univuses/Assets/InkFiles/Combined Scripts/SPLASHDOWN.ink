@@ -527,6 +527,8 @@ Being pragmatic about the situation, you call in sick to the tutor. Studies don'
         You've also joined the Orientation committee as an OGL for the incoming batch of freshmen. You want to enjoy orientation with them, and help them transition smoothly into university life. 
         
         Your year 1 life was filled with ups and downs, but looking back, you've had more fond memories than you have regrets. To you, experiencing life's different flavours has always came first, and you were satisfied with your freshman experience.
+        
+        —END—
         -> END
         
         
@@ -830,6 +832,8 @@ You slap yourself mentally. You need to prioritise your grades, that's why you c
         By being open to interacting with many more people this past semester, you've joined many groups friends who are making plans together over the holidays. You may not be able to attend all of them, but you know they'd understand, and you hope to stay friends even after summer ends.
         
         Your year 1 life was filled with ups and downs, but looking back, you've had more fond memories than you have regrets. You've come to realise that your university experience is itself a part of your larger life story and are now moving towards your goals in life. On a whole, you are satisfied with your freshman experience.
+        
+        —END—
         -> END
     
 
@@ -1407,9 +1411,18 @@ You remind yourself that this degree is a stepping stone to further applications
     
     You decide on a few things on your last night in your little room you called home. 
     
-    * [Accept an internship offer you thoughtlessly applied for in Semester 1.] With that, you drift off to sleep, ending your first academic year in NUS.-> END
-    * [Pursue Orbital, a summer module where you code a project in pairs.] You decide you might as well clear 4MCs, and also try out coding something totally new. You think about a text-based adventure, where NUS students can choose their path... -> END
-    * [Backpack and travel.] You decide you need a rest for the summer, and take things as they come. With that, you plan potential destinations, and drift off to sleep, ending your first academic year in NUS. -> END
+    * [Accept an internship offer you thoughtlessly applied for in Semester 1.] With that, you drift off to sleep, ending your first academic year in NUS.
+    
+    —END—
+    -> END
+    * [Pursue Orbital, a summer module where you code a project in pairs.] You decide you might as well clear 4MCs, and also try out coding something totally new. You think about a text-based adventure, where NUS students can choose their path... 
+    
+    —END—
+    -> END
+    * [Backpack and travel.] You decide you need a rest for the summer, and take things as they come. With that, you plan potential destinations, and drift off to sleep, ending your first academic year in NUS. 
+    
+    —END—
+    -> END
     
 
 // CAELAN START
@@ -1706,6 +1719,7 @@ Your university story begins earlier than most, with a surprising notification f
     }
     On a whole, you've taken a more interesting journey than most: joining NUS College for a semester before choosing to drop it. Yet there are no actual answers to life; Your current path is as valid as any other, and you should be proud of yourself for making it this far. 
     
+    —END—
     -> END
     
     = Stayed_Sem2
@@ -1763,6 +1777,8 @@ Your university story begins earlier than most, with a surprising notification f
     = Stayed_Summer
     Summer break arrives, and your time as a first year law student ends. You've chosen to go on an overseas trip to Taiwan with floormates from NUS College. You've also applied to join the freshmen orientation central committee, wanting to help the first years with orientation into NUS, and gotten accepted for it.
     On a whole, you've made a daring choice to commit to the newly started NUS College. Nobody knows where it will lead; yet your bold choice should be lauded. Don't be afraid to go off the beaten path if something you like is in the shrubbery, I say. 
+    
+    —END—
     -> END
     
 
@@ -1902,6 +1918,7 @@ Your university story begins earlier than most, with a surprising notification f
     You decide to take a gap year to rediscover your interests and aptitude. You have secured an internship with Youth Corps, believing that service will guide you towards the path you wish to lead. 
     Buckling your family's expectations to seek a path to call your own, your decision to only commit to something that you find meaning in is laudable. After all, life is not a sprint but a marathon, and no setback, including your decision to drop out of law school, is permanent. A summation of your life can only be done at its end, don't you agree?
     
+    —END—
     -> END
     
     = Stay
@@ -1979,6 +1996,8 @@ Your university story begins earlier than most, with a surprising notification f
     Summer break arrives, and your time as a first year law student ends. You have applied and been selected to intern at Pro Bono SG, where you hope to gain insights into the lives of lawyers doing pro bono work. In helping others, you have learned to see how blessed you are, and you wish to continue doing what you can to give back as a lawyer.
     
     You've had a meaningful year 1 experience, gaining insights into the law industry that contradict your ideals but still choosing to stick to your degree anyway.{LAW_SCORE > 4: Your newfound motivation has also driven you to remarkable breakthroughs.} Your commitment should be lauded and your journey of self-rediscovery yields insights that would be inspiring for one and all.
+    
+    —END—    
     -> END
     
 // DARYL START    
@@ -2491,6 +2510,8 @@ How do you envision your univeristy life?
     
     = SSH_Sleep
     With that, you drift off to sleep, ending your first academic year in NUS.
+    
+    —END—
     -> END
     
  === Daryl_campus_life
@@ -3045,5 +3066,7 @@ How do you envision your univeristy life?
     
     = SL_Sleep
     With that, you drift off to sleep, ending your first academic year in NUS.
+    
+    —END—
     -> END
  

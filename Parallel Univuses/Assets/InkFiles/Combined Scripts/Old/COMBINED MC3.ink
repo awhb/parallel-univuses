@@ -1185,14 +1185,13 @@ You remind yourself that this degree is a stepping stone to further applications
         
         
     = Try_frisbee_exco
-    You try to run for the treasurer role for climbing. The very same week, you have a small speech on how you envision the club to look like, and the things you want to change.
+    You try to run for the treasurer role for frisbee. The very same week, you have a small speech on how you envision the club to look like, and the things you want to change.
         ~ try_for = "frisbee"
         * [Start Week 10.]
         -> Week_10
             
     = Week_10
     This week, One of your CS1101S assignments prove to be incredibly difficult. You spent hours on it, but you still cannot figure it out. The deadline is in 30 minutes, but you haven't gotten anywhere near the intended result. It contributes to your final grade. 
-    
     You have two options:
     
     * [Copy your friends code and change it a little.] -> S1_Copy_Code
@@ -1237,13 +1236,13 @@ You remind yourself that this degree is a stepping stone to further applications
     = PP_Start_Exam
     { sleep_amount:
     - 0:
-    The examination goes reasonably well. With the extra sleep, you feel refreshed and are able to answer the auestions easily. However, you found out later that one of the questions came out in the past year paper that you didn't do. Regardless, you think to yourself: "If I didn't get enough sleep, I might not have been able to answer the other questions". 
+    The examination goes reasonably well. With lesser sleep, you start to feel lethargic towards the end. Thankfully however, the last question came out in the past year paper that you attempted the night before.
     
         You continue working through the other exams.
         
     * [Finish Papers.] -> PP_Before_Winter
-    - 1:
-    The examination goes reasonably well. With lesser sleep, you start to feel lethargic towards the end. Thankfully however, the last question came out in the past year paper that you attempted the night before.
+    - else: 
+    The examination goes reasonably well. With the extra sleep, you feel refreshed and are able to answer the auestions easily. However, you found out later that one of the questions came out in the past year paper that you didn't do.
     
     You continue working through the other exams.
     
@@ -1281,9 +1280,9 @@ You remind yourself that this degree is a stepping stone to further applications
     { path:
     -1 : You sit down and take a deep think. You remind yourself you took this major out of interest, but you were always interested in the application. How websites work, how traffic systems work and how Google finds the best routes to places. Not ternary operations, Relations, and Gaussian Elimination. 
     
-    2: You sit down and take a deep think. You question if you are really enjoying this major. 
+    2: You look out into the distance. You question if you are really enjoying this major. Or if earning a higher starting salary is worth all this tiredness and stress. 
     
-    3: You sit down and take a deep think. You question if this path is just a roundabout one, and you're taking the long way to apply your knowledge in the industry you want to be in.
+    3: You wrinkle your nose and wish you had a crystal bal to peer into your future. Is this path is just a roundabout one, and you're taking the longer way round to be in the industry you want to enter? You wonder if life would be what you imagined it to be five years from now. 
     }
     
     You mull over it a little longer, until you slowly come to terms with the present. "It is, what it is," you tell yourself. 
@@ -2223,18 +2222,17 @@ How do you envision your univeristy life?
     
     Before long, it is Sunday, but you have one more practice paper you want to cram before the exam tomorrow at 9AM. What do you choose to do?
     * [Ignore the paper and decide sleep is more important.] You decide to go to bed instead, at 12AM. 
-    ~ sleep_amount = 2
+    ~ sleep_amount ++
     -> SSH_Start_Exam
     * [Do the paper because you are stressed.] You decide to do it, and go to bed at 2AM. 
-    ~ sleep_amount = 1
     -> SSH_Start_Exam
     
     = SSH_Start_Exam
     { sleep_amount:
-    - 1:
-    The examination goes reasonably well. With the extra sleep, you feel refreshed and are able to answer the auestions easily. However, you found out later that one of the questions came out in the past year paper that you didn't do. Regardless, you think to yourself: "If I didn't get enough sleep, I might not have been able to answer the other questions". 
-    - 2:
+    - 0:
     The examination goes reasonably well. With lesser sleep, you start to feel lethargic towards the end. Thankfully however, the last question came out in the past year paper that you attempted the night before.
+    - else:
+    The examination goes reasonably well. With the extra sleep, you feel refreshed and are able to answer the auestions easily. However, you found out later that one of the questions came out in the past year paper that you didn't do.
     }
     
     * [Continue working through the other exams.] -> SSH_Before_Winter
@@ -2796,18 +2794,17 @@ How do you envision your univeristy life?
     
     Before long, it is Sunday, but you have one more practice paper you want to cram before the exam tomorrow at 9AM. What do you choose to do?
     * [Ignore the paper and decide sleep is more important.] You decide to go to bed instead, at 12AM. 
-    ~ sleep_amount = 2
+    ~ sleep_amount++
     -> SL_Start_Exam
     * [Do the paper because you are stressed.] You decide to do it, and go to bed at 2AM. 
-    ~ sleep_amount = 1
     -> SL_Start_Exam
     
     = SL_Start_Exam
     { sleep_amount:
-    - 1:
-    The examination goes reasonably well. With the extra sleep, you feel refreshed and are able to answer the auestions easily. However, you found out later that one of the questions came out in the past year paper that you didn't do. Regardless, you think to yourself: "If I didn't get enough sleep, I might not have been able to answer the other questions". 
-    - 2:
+    - 0:
     The examination goes reasonably well. With lesser sleep, you start to feel lethargic towards the end. Thankfully however, the last question came out in the past year paper that you attempted the night before.
+    - else:
+    The examination goes reasonably well. With the extra sleep, you feel refreshed and are able to answer the auestions easily. However, you found out later that one of the questions came out in the past year paper that you didn't do.
     }
     * [Continue working through the other exams.] -> SL_Before_Winter
     

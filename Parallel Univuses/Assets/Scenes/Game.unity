@@ -1026,7 +1026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd743441b8ba441df9da93974c17440e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkJSON: {fileID: 4900000, guid: 2a5638cea31664c5db4a820b4ee380d8, type: 3}
+  inkJSON: {fileID: 4900000, guid: 04e587844496647c79f68bad3d63b534, type: 3}
   textPrefab: {fileID: 2291176650330657273, guid: 306afa63d3602417b92d43ca9dfe3e94, type: 3}
   buttonPrefab: {fileID: 4905929437358837314, guid: 5e26048c7f74f40f490dae8f6f8c5804, type: 3}
   audioClipArray:
